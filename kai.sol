@@ -617,7 +617,7 @@ contract AURA is Context, IERC20, Ownable {
     mapping(address => mapping(address => uint256)) internal _allowances;
 
     uint256 private constant MAX = ~uint256(0);
-    uint256 internal _tokenTotal = 20_000e9;
+    uint256 internal _tokenTotal = 10_000e9;
     uint256 internal _reflectionTotal = (MAX - (MAX % _tokenTotal));
 
     mapping(address => bool) isExcludedFromFee;
