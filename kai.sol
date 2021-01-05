@@ -604,13 +604,13 @@ contract Balancer {
     }
 }
 
-contract AURA is Context, IERC20, Ownable {
+contract KAI is Context, IERC20, Ownable {
     using SafeMath for uint256;
     using Address for address;
 
-    string private _name = "Aura Protocol";
-    string private _symbol = "AURA";
-    uint8 private _decimals = 9;
+    string private _name = "Cobra Kai";
+    string private _symbol = "KAI";
+    uint8 private _decimals = 8;
 
     mapping(address => uint256) internal _reflectionBalance;
     mapping(address => uint256) internal _tokenBalance;
