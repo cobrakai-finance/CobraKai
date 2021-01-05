@@ -610,14 +610,14 @@ contract KAI is Context, IERC20, Ownable {
 
     string private _name = "Cobra Kai";
     string private _symbol = "KAI";
-    uint8 private _decimals = 8;
+    uint8 private _decimals = 9;
 
     mapping(address => uint256) internal _reflectionBalance;
     mapping(address => uint256) internal _tokenBalance;
     mapping(address => mapping(address => uint256)) internal _allowances;
 
     uint256 private constant MAX = ~uint256(0);
-    uint256 internal _tokenTotal = 10_000e9;
+    uint256 internal _tokenTotal = 6_400e9;
     uint256 internal _reflectionTotal = (MAX - (MAX % _tokenTotal));
 
     mapping(address => bool) isExcludedFromFee;
@@ -626,8 +626,8 @@ contract KAI is Context, IERC20, Ownable {
     
     //@dev The tax fee contains two decimal places so 250 = 2.5%
     uint256 public _feeDecimal = 2;
-    uint256 public _taxFee = 250;
-    uint256 public _liquidityFee = 250;
+    uint256 public _taxFee = 400;
+    uint256 public _liquidityFee = 400;
 
     uint256 public _rebalanceCallerFee = 500;
 
@@ -646,7 +646,7 @@ contract KAI is Context, IERC20, Ownable {
     uint256 public liquidityAddedAt;
 
     uint256 public lastRebalance = now ;
-    uint256 public rebalanceInterval = 30 minutes;
+    uint256 public rebalanceInterval = 33 minutes;
     
     IUniswapV2Router02 public  uniswapV2Router;
     address public  uniswapV2Pair;
@@ -810,10 +810,10 @@ contract KAI is Context, IERC20, Ownable {
     function excludeAccount(address account) external onlyOwner() {
         require(
             account != 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D,
-            "AURA: Uniswap router cannot be excluded."
+            "KAI: Uniswap router cannot be excluded."
         );
-        require(account != address(this), 'AURA: The contract it self cannot be excluded');
-        require(!_isExcluded[account], "AURA: Account is already excluded");
+        require(account != address(this), 'KAI: The contract it self cannot be excluded');
+        require(!_isExcluded[account], "KAI: Account is already excluded");
         if (_reflectionBalance[account] > 0) {
             _tokenBalance[account] = tokenFromReflection(
                 _reflectionBalance[account]
@@ -824,7 +824,7 @@ contract KAI is Context, IERC20, Ownable {
     }
 
     function includeAccount(address account) external onlyOwner() {
-        require(_isExcluded[account], "AURA: Account is already included");
+        require(_isExcluded[account], "KAI: Account is already included");
         for (uint256 i = 0; i < _excluded.length; i++) {
             if (_excluded[i] == account) {
                 _excluded[i] = _excluded[_excluded.length - 1];
